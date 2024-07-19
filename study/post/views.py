@@ -21,7 +21,7 @@ def write(request):
             post.save()
             for img in request.FILES.getlist('image', None):
                 Image.objects.create(post=post, image=img)
-            return redirect('list')
+            return redirect('post:list')
     else:
         form=PostForm()
         return render(request,'write.html', {'form':form})

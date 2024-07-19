@@ -5,19 +5,19 @@
 </head>
 <body>
 {% if user.is_authenticated %}
-<h3><a href="http://127.0.0.1:8000/login/home/logout/">로그아웃</a></h3>
+<h3><a href="{% url 'login:logout' %}">로그아웃</a></h3>
 <p>{{user}}님, 환영합니다!</p>
 <h1>목록</h1>
 <ul>
     {% for post in posts %}
     {%if request.user == post.user%}
-    <li><a href="{% url 'show' post.id %}">{{ post.title }}</a></li>
+    <li><a href="{% url 'post:show' post.id %}">{{ post.title }}</a></li>
     {%endif%}
     {% endfor %}
 </ul>
-<a href="{% url 'write' %}">글 작성</a>
+<a href="{% url 'post:write' %}">글 작성</a>
 {% else %}
-<h3><a href="http://127.0.0.1:8000/login/home/">메인페이지</a></h3>
+<h3><a href="{% url 'login:home' %}">메인페이지</a></h3>
 <p>로그인해주세요.</p>
 {% endif %}
 </body>

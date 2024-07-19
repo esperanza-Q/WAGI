@@ -13,7 +13,7 @@ def signup(request):
                 email=request.POST['email'],
             )
             auth.login(request, user)
-            return redirect('list')
+            return redirect('post:list')
         return render(request, 'signup.html')
     return render(request, 'singup.html')
 
@@ -25,7 +25,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('list')
+            return redirect('post:list')
         else:
             return render(request, 'login.html',{'error':'username or password is incorrect.'})
     else:
@@ -34,7 +34,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('home')
+    return redirect('login:home')
 
 def home(request):
     return render(request, 'home.html')
